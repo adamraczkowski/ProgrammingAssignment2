@@ -57,3 +57,20 @@ cacheSolve <- function(x, ...) {
         ## Return result
         inv
 }
+
+## Test the functions
+## Sample matrix
+mat <- matrix(c(2, 1, 1, 2), 2, 2)
+
+## Wrap it in the special cache object
+cachedMat <- makeCacheMatrix(mat)
+
+## First call → computes inverse
+cacheSolve(cachedMat)
+
+## Second call → retrieves from cache
+cacheSolve(cachedMat)
+
+## Change the matrix → cache resets
+cachedMat$set(matrix(c(4, 2, 2, 4), 2, 2))
+cacheSolve(cachedMat)  # computes new inverse
